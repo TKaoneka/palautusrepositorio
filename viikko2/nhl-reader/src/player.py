@@ -1,6 +1,5 @@
 import requests
 from rich.table import Table
-from rich.console import Console
 
 class PlayerReader:
     def __init__(self, url):
@@ -28,8 +27,7 @@ class PlayerStats:
         for player in nation_players:
             table.add_row(player.name, player.team, f"{player.goals}", f"{player.assists}", f"{player.goals + player.assists}")
 
-        console = Console()
-        console.print(table) 
+        return table 
 
 class Player:
     def __init__(self, dict):
