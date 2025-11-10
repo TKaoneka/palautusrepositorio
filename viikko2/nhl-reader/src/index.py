@@ -5,9 +5,7 @@ def main():
     reader = PlayerReader(url)
     stats = PlayerStats(reader)
     players = stats.top_scorers_by_nationality("FIN")
-
-    for player in players:
-        print(player)
+    print(players)
 
 if __name__ == "__main__":
     main()

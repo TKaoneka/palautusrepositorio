@@ -1,4 +1,6 @@
 import requests
+from rich.table import Table
+from rich.console import Console
 
 class PlayerReader:
     def __init__(self, url):
@@ -15,7 +17,19 @@ class PlayerStats:
         self.players = reader.get_players()
 
     def top_scorers_by_nationality(self, nation):
-        return list(sorted(filter(lambda x: x.nationality == nation, self.players), key=lambda x: x.goals + x.assists, reverse=True))
+        nation_players = list(sorted(filter(lambda x: x.nationality == nation, self.players), key=lambda x: x.goals + x.assists, reverse=True))
+        table = Table(title=f"Season 2024-25 from {nation}")
+        table.add_column("Released", style="cyan")
+        table.add_column("teams", style="magenta")
+        table.add_column("goals", style="green")
+        table.add_column("assists", style="green")
+        table.add_column("points", style="green")
+ 
+        for player in nation_players:
+            table.add_row(player.name, player.team, f"{player.goals}", f"{player.assists}", f"{player.goals + player.assists}")
+
+        console = Console()
+        console.print(table) 
 
 class Player:
     def __init__(self, dict):
