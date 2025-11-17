@@ -16,3 +16,14 @@ class AppLibrary:
         }
 
         requests.post(f"{self._base_url}/register", data=data)
+    
+    def create_user_password_twice(self, username, password_1, password_2):
+        data = {
+            "username": username,
+            "password": password_1,
+            "password_confirmation": password_2
+        }
+        if data["password"] == data["password_confirmation"]:
+            requests.post(f"{self._base_url}/register", data=data)
+        else:
+            pass

@@ -76,9 +76,22 @@ def render_register():
 @app.route("/register", methods=["POST"])
 def handle_register():
     username = request.form.get("username")
+    if len(username) < 3:
+        flash("Username is too short; min. 3 characters")
+        return redirect_to_register()
+    
     password = request.form.get("password")
+    if len(password) < 8:
+        flash("Password is too short; min. 8 characters")
+        return redirect_to_register()
+    
     password_confirmation = request.form.get("password_confirmation")
-
+    if password != password_confirmation:
+        try:
+            user_service.create_user_password_twice(username, password, password_confirmation)
+        except Exception:
+            flash("Password is invalid; non-matching passwords")
+            return redirect_to_register()
     try:
         user_service.create_user(username, password, password_confirmation)
         return redirect_to_welcome()
