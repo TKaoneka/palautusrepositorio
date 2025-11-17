@@ -85,13 +85,15 @@ def handle_register():
         flash("Password is too short; min. 8 characters")
         return redirect_to_register()
     
+    elif password.isalpha():
+        flash("Password is invalid; add a non-alphabetic character")
+        return redirect_to_register()
+    
     password_confirmation = request.form.get("password_confirmation")
     if password != password_confirmation:
-        try:
-            user_service.create_user_password_twice(username, password, password_confirmation)
-        except Exception:
-            flash("Password is invalid; non-matching passwords")
-            return redirect_to_register()
+        flash("Password is invalid; non-matching passwords")
+        return redirect_to_register()
+        
     try:
         user_service.create_user(username, password, password_confirmation)
         return redirect_to_welcome()
