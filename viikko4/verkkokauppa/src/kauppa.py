@@ -11,6 +11,9 @@ class Kauppa:
     def aloita_asiointi(self):
         self._ostoskori = Ostoskori()
 
+    def nayta_tili(self):
+        return self._kaupan_tili
+
     def poista_korista(self, id):
         tuote = self._varasto.hae_tuote(id)
         self._ostoskori.poista(tuote)
@@ -25,5 +28,6 @@ class Kauppa:
     def tilimaksu(self, nimi, tili_numero):
         viite = self._viitegeneraattori.uusi()
         summa = self._ostoskori.hinta()
+        self._pankki.tilisiirto(nimi, viite, tili_numero, self._kaupan_tili, summa)
 
-        return self._pankki.tilisiirto(nimi, viite, tili_numero, self._kaupan_tili, summa)
+        return summa
