@@ -15,6 +15,7 @@ def main():
     kauppa.lisaa_koriin(3)
     kauppa.poista_korista(1)
     kauppa.poista_korista(3)
+    kauppa.lisaa_koriin(3)
     kauppa.tilimaksu("Pekka Mikkola", "1234-12345")
 
     # seuraava asiakas
