@@ -12,17 +12,16 @@ class TennisGame:
             self.p2_score += 1
 
     def get_score(self):
-
-        if self.p1_score == self.p2_score and self.p1_score < 3:
+        if self.p1_score == self.p2_score:
             return self.equal_score()
 
-        elif self.p1_score == self.p2_score and self.p1_score == 2:
+        if self.p1_score >= 4 or self.p2_score >= 4:
             return self.advantage()
-        else:
-            return self.not_equal_score()
+
+        return self.not_equal_score()
 
     def equal_score(self):
-        score_names = ["Love-All", "Fifteen-all", "Thirty-All"]
+        score_names = ["Love-All", "Fifteen-All", "Thirty-All"]
         if self.p1_score < 3:
             score = score_names[self.p1_score]
         else:
@@ -30,7 +29,7 @@ class TennisGame:
         return score
 
     def not_equal_score(self):
-        score_names = ["Love", "Fifteen", "Thirty", "Fourty"]
+        score_names = ["Love", "Fifteen", "Thirty", "Forty"]
         if self.p1_score <= 3 and self.p2_score <= 3:
             return f"{score_names[self.p1_score]}-{score_names[self.p2_score]}"
 
@@ -41,9 +40,13 @@ class TennisGame:
             return "Win for player1"
 
     def advantage(self):
-        score = ["Advantage player1", " Advantage player2"]
         temp_score = self.p1_score - self.p2_score
-        if temp_score > 0:
-            return score[0]
+        if temp_score == 1:
+            return "Advantage player1"
+        elif temp_score == -1:
+            return "Advantage player2"
+        elif temp_score >= 2:
+            return "Win for player1"
         else:
-            return score[1]
+
+            return "Win for player2"
