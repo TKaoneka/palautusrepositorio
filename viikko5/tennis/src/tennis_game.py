@@ -33,12 +33,6 @@ class TennisGame:
         if self.p1_score <= 3 and self.p2_score <= 3:
             return f"{score_names[self.p1_score]}-{score_names[self.p2_score]}"
 
-        elif self.p1_score < 3 and self.p2_score == 4:
-            return "Win for player2"
-
-        elif self.p2_score < 3 and self.p1_score == 4:
-            return "Win for player1"
-
     def advantage(self):
         temp_score = self.p1_score - self.p2_score
         if temp_score == 1:
@@ -48,5 +42,4 @@ class TennisGame:
         elif temp_score >= 2:
             return "Win for player1"
         else:
-
             return "Win for player2"
