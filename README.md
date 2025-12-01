@@ -1,3 +1,3 @@
 
-Viikko 1 tehtävät 2-13/viikko 2 tehtävät 2-4: https://github.com/TKaoneka/ohtuvarasto 
-Viikko 3 tehtävät 2-4: https://github.com/TKaoneka/webcounter
+Viikko 1 t2-13/viikko 2 t2-4/viikko 5 t6: https://github.com/TKaoneka/ohtuvarasto 
+Viikko 3 t2-4: https://github.com/TKaoneka/webcounter
