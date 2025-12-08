@@ -13,6 +13,7 @@ class Kayttoliittyma:
     def __init__(self, sovelluslogiikka, root):
         self._sovelluslogiikka = sovelluslogiikka
         self._root = root
+        self.uusin_arvo = 0
 
     def kaynnista(self):
         self._arvo_var = StringVar()
@@ -55,6 +56,9 @@ class Kayttoliittyma:
         self._nollaus_painike.grid(row=2, column=2)
         self._kumoa_painike.grid(row=2, column=3)
 
+    def kumoa(self, uusin_arvo):
+        self._sovelluslogiikka.aseta_arvo(uusin_arvo)
+
     def _suorita_komento(self, komento):
         arvo = 0
 
@@ -66,12 +70,16 @@ class Kayttoliittyma:
         self.komennot = {Komento.SUMMA: self._sovelluslogiikka.plus,
                          Komento.EROTUS: self._sovelluslogiikka.miinus,
                          Komento.NOLLAUS: self._sovelluslogiikka.nollaa,
-                         Komento.KUMOA: None}
+                         Komento.KUMOA: self.kumoa}
 
         if komento in self.komennot:
             if self.komennot[komento] == self._sovelluslogiikka.nollaa:
                 self.komennot[komento]()
+
+            elif self.komennot[komento] == self.kumoa:
+                self.komennot[komento](self.uusin_arvo)
             else:
+                self.uusin_arvo = self._sovelluslogiikka.arvo()
                 self.komennot[komento](arvo)
 
         self._kumoa_painike["state"] = constants.NORMAL
